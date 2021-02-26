@@ -37,7 +37,7 @@ public class Controller {
         
             int h = rnd.nextInt(200)+100;
             int w = 10;
-            sticks.add(new Stick(w, h, Color.yellow, i));
+            sticks.add(new Stick(w, h, Color.MAGENTA, i));
             
         }
         
@@ -52,36 +52,54 @@ public class Controller {
         }
     }
     
-    public static void selectionSort(){
+    public static boolean checkSelectionSort(){
+    
+        for(int i = 0 ; i < number_of_stick - 1;i++){
+            
+            if(sticks.get(i).getHEIGHT() > sticks.get(i+1).getWIDTH()) return false;
         
+        }
+    
+        return true;
+    
+    }
+    public static void selectionSort(){
         Thread thread = new Thread("New Thread") {
             public void run(){
               for(int i = 0 ; i < number_of_stick; i++){
                     
-                    Stick the_one = sticks.get(i);
-                    the_one.setColor(Color.CYAN);
                     Stick min = sticks.get(i);
+                    int minHeight = min.getHEIGHT();
+                    min.setColor(Color.GREEN);
+                    Stick tmp2 = min ;
                     for(int j = i +1 ; j < number_of_stick; j++ ){
-                       Stick tmp = sticks.get(j);
-                       tmp.setColor(Color.RED);
-                       if(tmp.getHEIGHT() < min.getHEIGHT()) min = tmp;
-                        
+                        Stick temp = sticks.get(j);
+
+                        if(min.getHEIGHT() > temp.getHEIGHT()){
+                             minHeight = temp.getHEIGHT();
+                             tmp2 = temp;
+                        }
                        
                         myFrame.repaint();
+                        temp.setColor(Color.RED);
+                        try {
+                            //Thread.sleep(150);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                     
-                    Stick x = the_one;
-                    the_one = min;
-                    min = x;
+                    int tmp = min.getHEIGHT();
+                    min.setHEIGHT(minHeight);
+                    tmp2.setHEIGHT(tmp);
+                    
                     myFrame.repaint();
                 }
             }
         };
        thread.start();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+       if(!checkSelectionSort()) selectionSort();
+        
     }
 }
