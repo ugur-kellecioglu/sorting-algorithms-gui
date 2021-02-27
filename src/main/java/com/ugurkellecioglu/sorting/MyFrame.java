@@ -10,6 +10,7 @@ import static com.ugurkellecioglu.sorting.Controller.number_of_stick;
 import static com.ugurkellecioglu.sorting.Controller.sticks;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -21,9 +22,12 @@ public class MyFrame extends javax.swing.JFrame {
     /**
      * Creates new form MyFrame
      */
+   
+
     public MyFrame() {
-        initComponents();
         
+        initComponents();
+
     }
 
     /**
@@ -41,6 +45,12 @@ public class MyFrame extends javax.swing.JFrame {
         slider_array_count = new javax.swing.JSlider();
         panel_sticks = new MyPanel();
         button_selection_sort = new javax.swing.JButton();
+        label_time_text = new javax.swing.JLabel();
+        label_time = new javax.swing.JLabel();
+        slider_sleep_thread = new javax.swing.JSlider();
+        button_bubble_sort = new javax.swing.JButton();
+        button_insertion_sort = new javax.swing.JButton();
+        button_merge_sort = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +87,37 @@ public class MyFrame extends javax.swing.JFrame {
             }
         });
 
+        label_time_text.setText("Time:");
+
+        label_time.setText("0");
+
+        slider_sleep_thread.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slider_sleep_threadStateChanged(evt);
+            }
+        });
+
+        button_bubble_sort.setText("Bubble Sort");
+        button_bubble_sort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_bubble_sortActionPerformed(evt);
+            }
+        });
+
+        button_insertion_sort.setText("Insertion Sort");
+        button_insertion_sort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_insertion_sortActionPerformed(evt);
+            }
+        });
+
+        button_merge_sort.setText("Merge Sort");
+        button_merge_sort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_merge_sortActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_wrapperLayout = new javax.swing.GroupLayout(panel_wrapper);
         panel_wrapper.setLayout(panel_wrapperLayout);
         panel_wrapperLayout.setHorizontalGroup(
@@ -87,14 +128,23 @@ public class MyFrame extends javax.swing.JFrame {
                     .addGroup(panel_wrapperLayout.createSequentialGroup()
                         .addComponent(slider_array_count, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label_array_count))
+                        .addComponent(label_array_count)
+                        .addContainerGap(1046, Short.MAX_VALUE))
                     .addGroup(panel_wrapperLayout.createSequentialGroup()
                         .addGroup(panel_wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(button_create_array, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(button_selection_sort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34)
-                        .addComponent(panel_sticks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(212, Short.MAX_VALUE))
+                            .addComponent(button_create_array, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button_selection_sort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panel_wrapperLayout.createSequentialGroup()
+                                .addComponent(label_time_text)
+                                .addGap(28, 28, 28)
+                                .addComponent(label_time))
+                            .addComponent(slider_sleep_thread, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button_bubble_sort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button_insertion_sort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button_merge_sort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel_sticks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86))))
         );
         panel_wrapperLayout.setVerticalGroup(
             panel_wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +158,23 @@ public class MyFrame extends javax.swing.JFrame {
                     .addGroup(panel_wrapperLayout.createSequentialGroup()
                         .addComponent(button_create_array)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_selection_sort))
-                    .addComponent(panel_sticks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addComponent(button_selection_sort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_bubble_sort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_insertion_sort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_merge_sort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panel_wrapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label_time_text)
+                            .addComponent(label_time))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(slider_sleep_thread, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_wrapperLayout.createSequentialGroup()
+                        .addComponent(panel_sticks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 15, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,27 +197,52 @@ public class MyFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_button_create_arrayActionPerformed
 
     private void slider_array_countStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slider_array_countStateChanged
-      label_array_count.setText(String.valueOf(slider_array_count.getValue()));
+        label_array_count.setText(String.valueOf(slider_array_count.getValue()));
     }//GEN-LAST:event_slider_array_countStateChanged
 
     private void button_selection_sortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_selection_sortActionPerformed
-       Controller.selectionSort();
+        Controller.selectionSort();
+        
+
     }//GEN-LAST:event_button_selection_sortActionPerformed
+
+    private void slider_sleep_threadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slider_sleep_threadStateChanged
+        Controller.THREAD_SLEEP = slider_sleep_thread.getValue();
+    }//GEN-LAST:event_slider_sleep_threadStateChanged
+
+    private void button_bubble_sortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_bubble_sortActionPerformed
+        Controller.bubbleSort();
+    }//GEN-LAST:event_button_bubble_sortActionPerformed
+
+    private void button_insertion_sortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_insertion_sortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_insertion_sortActionPerformed
+
+    private void button_merge_sortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_merge_sortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_merge_sortActionPerformed
 
     public JPanel getPanel_sticks() {
         return panel_sticks;
     }
 
-   
+    public JLabel getLabel_time() {
+        return label_time;
+    }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_bubble_sort;
     private javax.swing.JButton button_create_array;
+    private javax.swing.JButton button_insertion_sort;
+    private javax.swing.JButton button_merge_sort;
     private javax.swing.JButton button_selection_sort;
     private javax.swing.JLabel label_array_count;
+    private javax.swing.JLabel label_time;
+    private javax.swing.JLabel label_time_text;
     private MyPanel panel_sticks;
     private javax.swing.JPanel panel_wrapper;
     private javax.swing.JSlider slider_array_count;
+    private javax.swing.JSlider slider_sleep_thread;
     // End of variables declaration//GEN-END:variables
 }

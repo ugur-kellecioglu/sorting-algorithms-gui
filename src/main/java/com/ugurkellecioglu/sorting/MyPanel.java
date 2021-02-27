@@ -32,7 +32,7 @@ class MyPanel extends JPanel {
             int h = sticks.get(i).getHEIGHT();
             int w = sticks.get(i).getWIDTH();
             g.setColor(sticks.get(i).getColor());
-            g.fillRect(i*w, 0, w-5, h);
+            g.fillRect(i*w, 0, w-4, h);
         
         }
 
